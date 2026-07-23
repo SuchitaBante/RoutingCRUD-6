@@ -1,0 +1,41 @@
+<div class="roe">
+    <div class="col-md-6 offset-md-2 mb-4">
+        <div class="card shadow" *ngIf="productobj">
+            <img [src]="productobj.pimage"
+            [alt]="productobj.pname" class="card-img-top" style="height: 300px; object-fit: cover;">
+<div class="card-body">
+    <h4 class="card-title">{{productobj.pname}}</h4>
+    <p class="card-text text-muted">{{productobj.pdescription}}</p>
+    <h5 class="text-success">{{productobj.pprice | currency:'INR'}}</h5>
+    <p>
+        <strong>Product ID:</strong>
+        {{productobj.pid}}
+    </p>
+    <p>
+        <strong>Status:</strong>
+        <span class="badge ms-2" [ngClass]="{
+            'bg-success': productobj.pstatus==='Available',
+            'bg-danger': productobj.pstatus ==='Out of Stock',
+            'bg-secondary': productobj.pstatus==='Discontinued'
+        }">
+        {{productobj.pstatus}}
+    </span>
+    </p>
+</div>
+
+<div class="card-footer">
+    <div class="d-flex justify-content-between">
+        <button mat-mini-fab color="primary" (click)="onEditProduct()">
+            <mat-icon>edit</mat-icon>
+        </button>
+
+        <button mat-mini-fab color="warn" (click)="onRemoveProduct()">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </div>
+</div>
+        </div>
+    </div>
+</div> 
+
+      

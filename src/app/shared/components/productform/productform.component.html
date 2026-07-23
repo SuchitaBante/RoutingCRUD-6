@@ -1,0 +1,79 @@
+<div class="text-center">
+    <h1 class="fw-bold text-primary">
+        {{isInEditMode? 'Update Product': 'Add Product'}}
+    </h1>
+</div>
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-9 offset-md-1">
+            <div class="card">
+                <div class="card-body">
+                    <form [formGroup]="ProductForm" (ngSubmit)="onAddProduct()">
+                        <div class="form-group">
+                            <label>Name*</label>
+                            <input type="text" formControlName="pname" class="form-control">
+                            <small *ngIf="ProductForm.get('pname')?.touched && ProductForm.get('pname')?.invalid"
+                                class="text-danger">Name is required</small>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label>Price*</label>
+                            <input type="number" formControlName="pprice" class="form-control">
+                            <small *ngIf="ProductForm.get('pprice')?.touched && ProductForm.get('pprice')?.invalid"
+                                class="text-danger">Price is required</small>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label>Status*</label>
+                            <select class="form-control" formControlName="pstatus">
+                                <option value="">--Select Status--</option>
+                                <option value="Available">Available</option>
+                                <option value="Out of Stock">Out of Stock</option>
+                                <option value="Discontinued">Discontinued</option>
+                                <small
+                                    *ngIf="ProductForm.get('pstatus')?.touched && ProductForm.get ('pstatus')?.invalid"
+                                    class="text-danger">
+                                    Status is required
+                                </small>
+                            </select>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label>Description*</label>
+                            <textarea formControlName="pdescription" class="form-control"></textarea>
+                            <small
+                                *ngIf="ProductForm.get('pdescription')?.touched && ProductForm.get('pdescription')?.invalid"
+                                class="text-danger">
+                                Description is required
+                            </small>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label>Image*</label>
+                            <input type="text" class="form-control" formControlName="pimage">
+                            <small *ngIf="ProductForm.get('pimage')?.touched && ProductForm.get('pimage')?.invalid"
+                                class="text-danger">Image is required</small>
+                        </div>
+                        <br>
+
+                        <div class="form-group">
+                            <label for="canReturn">Product Return*</label>
+                            <select formControlName="canReturn" type="text" class="form-control" id="canReturn">
+                                <option [ngValue]="1">Yes</option>
+                                <option [ngValue]="0">No</option>
+                            </select>
+                        </div>
+                        <button *ngIf="!isInEditMode" type="submit" class="btn btn-primary w-100 mt-3">
+                            Add Product
+                        </button>
+                        <button *ngIf="isInEditMode" type="button" class="btn btn-primary w-100 mt-3"
+                            (click)="onUpdate()" [disabled]="DisableUpdatebtn">Update Product
+
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

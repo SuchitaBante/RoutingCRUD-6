@@ -1,0 +1,220 @@
+<div class="container mt-4 mb-4">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-primary text-white text-center">
+                    <h4 class="mb-0">
+                        {{ isInEditMode ? 'Update User' : 'Add User' }}
+                    </h4>
+                </div>
+
+                <div class="card-body">
+
+                    <form [formGroup]="userForm" (ngSubmit)="onAddUser()">
+
+                        <!-- User Name -->
+                        <div class="mb-3">
+                            <label class="form-label">User Name <span class="text-danger">*</span></label>
+
+                            <input type="text" class="form-control" formControlName="userName"
+                                placeholder="Enter User Name">
+
+                            <small class="text-danger"
+                                *ngIf="formControls['userName'].touched && formControls['userName'].invalid">
+                                User Name is required.
+                            </small>
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label class="form-label">User Role <span class="text-danger">*</span></label>
+
+                            <select class="form-control" formControlName="userRole">
+                                <option value="Java Full Stack Developer">Java Full Stack Developer</option>
+                                <option value="Angular Developer">Angular Developer</option>
+                                <option value="Frontend Developer">Frontend Developer</option>
+                                <option value="Backend Developer">Backend Developer</option>
+                                <option value="Backend Java Developer">Backend Java Developer</option>
+                                <option value="UI/UX Designer">UI/UX Designer</option>
+                                <option value="Frontend Angular Developer">Frontend Angular Developer</option>
+
+                                <option value="UI/UX Designer">UI/UX Designer</option>
+                            </select>
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label class="form-label">Profile Description <span class="text-danger">*</span></label>
+
+                            <textarea rows="3" class="form-control" formControlName="profileDescription"
+                                placeholder="Enter Description">
+              </textarea>
+
+                            <small class="text-danger"
+                                *ngIf="formControls['profileDescription'].touched && formControls['profileDescription'].invalid">
+                                Description is required.
+                            </small>
+                        </div>
+
+                        <!-- Image -->
+                        <div class="mb-3">
+                            <label class="form-label">Profile Image URL <span class="text-danger">*</span></label>
+
+                            <input type="text" class="form-control" formControlName="profileImage"
+                                placeholder="assets/images/user.jpg">
+
+                            <small class="text-danger"
+                                *ngIf="formControls['profileImage'].touched && formControls['profileImage'].invalid">
+                                Profile Image is required.
+                            </small>
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label class="form-label">Experience <span class="text-danger">*</span></label>
+
+                            <select class="form-control" formControlName="experienceYears">
+                                <option value="">Select Experience</option>
+                                <option value="0 to 2 Years">0 to 2 Years</option>
+                                <option value="2 to 4 Years">2 to 4 Years</option>
+                                <option value="4 to 6 Years">4 to 6 Years</option>
+                                <option value="6 to 8 Years">6 to 8 Years</option>
+                                <option value="3 to 5 Years">3 to 5 Years</option>
+                                <option value="2 to 4 Years">2 to 4 Years</option>
+                                <option value="1 to 3 Years">1 to 3 Years</option>
+                                <option value="8+ Years">8+ Years</option>
+
+                            </select>
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label class="form-label">Staus <span class="text-danger">*</span></label>
+
+                            <select class="form-control" formControlName="isActive">
+                                <option [ngValue]="true">Active</option>
+                                <option [ngValue]="false">Inactive</option>
+                            </select>
+                        </div>
+
+
+
+                        <div formArrayName="skills">
+
+                            <label class="form-label">Skills <span class="text-danger">*</span></label>
+
+
+
+                            <div class="row mb-3" *ngFor="let skill of skillsArr.controls; let i=index">
+
+                                <div class="col-md-10">
+
+                                    <input class="form-control" [formControlName]="i" placeholder="Enter Skill">
+
+                                    <small class="text-danger" *ngIf="skill.invalid && (skill.touched || skill.dirty)">
+                                        Skill is required.
+                                    </small>
+
+                                </div>
+
+                                <div class="col-md-2">
+
+                                    <button type="button" class="btn btn-outline-danger " (click)="onRemoveSkill(i)">
+                                        Remove
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                            <button type="button" class="btn btn-outline-primary" (click)="onAddSkill()"
+                                [disabled]="skillsArr.length >= 5">
+                                Add Skill
+                            </button>
+
+                            <div class="text-danger mt-2" *ngIf="skillsArr.length >= 5">
+                                Maximum 5 skills are allowed.
+                            </div>
+
+                        </div>
+
+                        <hr>
+
+
+                        <div formGroupName="address">
+
+                            <div class="row">
+
+
+                                <div class="col-md-6">
+
+                                    <label>Current Address</label>
+
+                                    <div formGroupName="current">
+
+                                        <input class="form-control mb-3" placeholder="City" formControlName="city">
+
+                                        <input class="form-control mb-3" placeholder="State" formControlName="state">
+
+                                        <input class="form-control mb-3" placeholder="Country"
+                                            formControlName="country">
+
+                                        <input class="form-control" placeholder="Zip Code" formControlName="zipcode">
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <label>Permanent Address</label>
+
+                                    <div formGroupName="permanent">
+
+                                        <input class="form-control mb-3" placeholder="City" formControlName="city">
+
+                                        <input class="form-control mb-3" placeholder="State" formControlName="state">
+
+                                        <input class="form-control mb-3" placeholder="Country"
+                                            formControlName="country">
+
+                                        <input class="form-control" placeholder="Zip Code" formControlName="zipcode">
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-check my-4">
+                            <input class="form-check-input" type="checkbox" formControlName="isAddSame"
+                                id="sameAddress">
+
+                            <label class="form-check-label" for="sameAddress">
+                                Permanent Address Same As Current
+                            </label>
+                        </div>
+
+
+                        <button *ngIf="!isInEditMode" type="submit" class="btn btn-primary w-100">
+                            Add User
+                        </button>
+
+                        <button *ngIf="isInEditMode" type="button" class="btn btn-warning w-100"
+                            (click)="onUpdateUser()">
+                            Update User
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

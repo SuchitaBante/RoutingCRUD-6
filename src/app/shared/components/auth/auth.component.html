@@ -1,0 +1,133 @@
+<main class="auth">
+    <div class="container">
+        <div class="row justify-content-center align-items-center min-vh-100">
+            <div class="col-lg-6 col-md-8 col-sm-10">
+                <div class="card shadow">
+
+                    <div class="card-body p-4 position-relative">
+
+                        
+                        <div class="text-center my-3" *ngIf="isLoading">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p class="mt-2 mb-0">Please wait...</p>
+                        </div>
+
+                        <h2 class="text-center mb-4">
+                            {{isAllreadyHaveAccount ? 'Login' : 'Create Account'}}
+                        </h2>
+
+                    
+                        <form *ngIf="!isAllreadyHaveAccount"
+                              [formGroup]="signInform"
+                              (ngSubmit)="onSignUp()">
+
+                            <div class="mb-3">
+                                <label class="form-label">Email</label>
+                                <input
+                                    type="email"
+                                    class="form-control"
+                                    placeholder="Enter Email"
+                                    formControlName="email">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Password</label>
+                                <input
+                                    type="password"
+                                    class="form-control"
+                                    placeholder="Enter Password"
+                                    formControlName="password">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">User Role</label>
+                                <select
+                                    class="form-control"
+                                    formControlName="userRole">
+
+                                    <option value="">Select Role</option>
+                                    <option value="buyer">Buyer</option>
+                                    <option value="superAdmin">Super Admin</option>
+
+                                </select>
+                            </div>
+
+                            <button
+                                type="submit"
+                                mat-raised-button
+                                color="primary"
+                                class="w-100"
+                                [disabled]="isLoading">
+
+                                Register
+
+                            </button>
+
+                        </form>
+
+                        
+                        <form *ngIf="isAllreadyHaveAccount"
+                              [formGroup]="loginform"
+                              (ngSubmit)="onLogIn()">
+
+                            <div class="mb-3">
+                                <label class="form-label">Email</label>
+                                <input
+                                    type="email"
+                                    class="form-control"
+                                    placeholder="Enter Email"
+                                    formControlName="email">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Password</label>
+                                <input
+                                    type="password"
+                                    class="form-control"
+                                    placeholder="Enter Password"
+                                    formControlName="password">
+                            </div>
+
+                            <button
+                                type="submit"
+                                mat-raised-button
+                                color="primary"
+                                class="w-100"
+                                [disabled]="isLoading">
+
+                                Login
+
+                            </button>
+
+                        </form>
+
+                        <div class="text-center mt-4">
+
+                            <a
+                                href="javascript:void(0)"
+                                *ngIf="isAllreadyHaveAccount"
+                                (click)="isAllreadyHaveAccount=false">
+
+                                Don't have an account? Register
+
+                            </a>
+
+                            <a
+                                href="javascript:void(0)"
+                                *ngIf="!isAllreadyHaveAccount"
+                                (click)="isAllreadyHaveAccount=true">
+
+                                Already have an account? Login
+
+                            </a>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

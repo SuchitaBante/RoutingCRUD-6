@@ -1,0 +1,38 @@
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-md-3">
+            <button class="btn btn-primary mb-3" routerLink="adduser">
+                Add User
+            </button>
+             <ul class="list-group" *ngIf="Users.length > 0; else NoData">
+
+                <li class="list-group-item"
+                    *ngFor="let user of Users"
+                    [routerLink]="['/userdashboard', user.userId]"
+                    routerLinkActive="active">
+
+                    {{ user.userName }}
+
+                </li>
+
+            </ul>
+
+            <ng-template #NoData>
+                <div class="text-center p-5">
+                    <h4 class="text-muted">No Users Available</h4>
+                </div>
+            </ng-template>
+
+        </div>
+
+        <div class="col-md-8">
+            <router-outlet> </router-outlet>
+        </div>
+    </div>
+</div>
+
+
+
+
+        
+        

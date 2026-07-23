@@ -1,0 +1,49 @@
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-md-12 text-end mb-3">
+            <button routerLink="addproduct" class="btn btn-primary">
+                Add Product
+            </button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <div class="card shadow">
+                <div class="list-group" *ngIf="products.length>0; else NoData">
+                    <div class="list-group-item list-group-item-action product-item" *ngFor="let product of products; trackBy:trackByFun"
+                   [routerLink]="[product.pid]" [queryParams]="{cr: product.canReturn}"  routerLinkActive="active">
+                   <div class="d-flex">
+                    <img [src]="product.pimage" class="rounded me-3" width="100" height="100" style="object-fit: cover;">
+                    <div class="flex-grow-1">
+                        <h5 class="mb-1">{{product.pname}}</h5>
+                        <span class="badge" [ngClass]="{
+                            'bg-success': product.pstatus==='Available',
+                            'bg-danger': product.pstatus==='Out of Stock',
+                            'bg-secondary': product.pstatus==='Discontinued'
+                        }">
+                        {{product.pstatus}}</span>
+                    </div>
+
+                   </div>
+                   </div>
+
+                </div>
+                <ng-template #NoData>
+                    <div class="text-center p-5">
+                        <h4 class="text-muted">No Products Available</h4>
+                    </div>
+                </ng-template>
+
+            </div>
+        </div>
+        <div class="col-md-8">
+            <router-outlet></router-outlet>
+        </div>
+        
+    </div>
+</div>
+
+                  
+      
+        

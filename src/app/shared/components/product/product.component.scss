@@ -1,0 +1,12 @@
+.productCard .card-header img{
+          height: 100vh;
+          width: 100%;
+          transition:all 0.3s linear;
+          object-fit: contain;
+} 
+
+
+
+.productCard img:hover{
+        transform:scale(1.05);
+}
